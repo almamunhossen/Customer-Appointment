@@ -17,7 +17,7 @@
   <div class="portal-header">
     <div class="logo">
       <a href="https://amhaj.net">
-        <img src="img/Amhaj-Digital-Solutions-Logo.svg" alt="amhaj logo" class="logo-img">
+        <img src="img/Amhaj-Digital-Solutions-Logo.png" alt="amhaj logo" class="logo-img">
       </a>
     </div>
     <div class="badge-hero"><a href="https://amhaj.net"><i class="fas fa-circle-check"></i> Home</a></div>
@@ -28,9 +28,10 @@
     <p><i class="fas fa-arrow-right" style="color: var(--primary-orange); margin-right: 6px;"></i> expand one category at a time select services, attach assets. Data is sent directly to your Google Sheet.</p>
   </div>
 
-  <!-- FORM — action points to your Google Apps Script web app -->
-  <form id="intakeForm" action="https://script.google.com/macros/s/AKfycbzbFiRgxTvubzh_uM7YFbNN1bNpOTdUqbxFjfL8qp5GfSob4GbyUt5xIH0-h3bDd6bA/exec" method="POST" enctype="multipart/form-data">
+  <!-- FORM — action is set from app.js -->
+  <form id="intakeForm" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="returnUrl" id="returnUrl" value="">
+    <noscript><div style="color:#b91c1c;margin:8px 0;padding:8px;border-radius:6px;background:#fff7f7;border:1px solid #fee2e2;">JavaScript is required to submit this form. Please enable JavaScript and try again.</div></noscript>
 
     <!-- CUSTOMER -->
     <div class="form-section">

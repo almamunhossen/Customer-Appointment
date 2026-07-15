@@ -15,7 +15,7 @@ const SHEET_NAME = "Sheet1";
 const DEBUG = true;
 
 // Optional: set this to your destination spreadsheet ID for web app mode
-const SPREADSHEET_ID = "1Wfms61evtEPiT6CNeDw9v9ce-FZRb-0nXKp0XPX7TWk";
+const SPREADSHEET_ID = "13mtBITF9gWx5v2c2pM8I3umvY5uLlvJw1ABuOs5-3YQ";
 
 // Upload folder ID for saved client files
 const UPLOAD_FOLDER_ID = "16UJvSVRp63a6XwN2XsxYFm-EUjSmEcYy";
