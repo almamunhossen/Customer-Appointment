@@ -11,6 +11,9 @@
 // The name of the sheet where data will be stored
 const SHEET_NAME = "Sheet1";
 
+// Debug mode: when true, doPost will return the error text directly for troubleshooting
+const DEBUG = true;
+
 // Optional: set this to your destination spreadsheet ID for web app mode
 const SPREADSHEET_ID = "1Wfms61evtEPiT6CNeDw9v9ce-FZRb-0nXKp0XPX7TWk";
 
@@ -69,6 +72,12 @@ function doPost(e) {
     // Get form data
     const params = e.parameter || {};
     const returnUrl = params.returnUrl || '';
+    // Quick access validation to avoid Google "You need access" UI for submitters
+    const accessError = checkAccess();
+    if (accessError) {
+      Logger.log('Access check failed: ' + accessError);
+      return createHtmlResponse('Access error: ' + accessError, false, returnUrl);
+    }
     const fileBlobs = getUploadedFiles(e);
     
     // Prepare data object
@@ -143,7 +152,11 @@ function doPost(e) {
   } catch (error) {
     const errorMessage = error.stack || error.toString();
     Logger.log("Error: " + errorMessage);
-    
+    // If DEBUG is enabled, return plain text error to browser for troubleshooting
+    if (typeof DEBUG !== 'undefined' && DEBUG) {
+      return ContentService.createTextOutput(errorMessage);
+    }
+
     return createHtmlResponse("❌ Error saving data: " + errorMessage, false, (e && e.parameter && e.parameter.returnUrl) || '');
   }
 }
@@ -164,6 +177,39 @@ function getUploadedFiles(e) {
     return Array.isArray(e.parameters.clientFiles) ? e.parameters.clientFiles : [e.parameters.clientFiles];
   }
   return [];
+}
+
+/**
+ * checkAccess - validate access to spreadsheet and upload folder early
+ * Returns null if OK, or an error message string if access is missing.
+ */
+function checkAccess() {
+  // Check spreadsheet access
+  if (SPREADSHEET_ID) {
+    try {
+      SpreadsheetApp.openById(SPREADSHEET_ID);
+    } catch (err) {
+      return 'Cannot open spreadsheet by ID. (' + err.toString() + ')';
+    }
+  } else {
+    try {
+      const ss = SpreadsheetApp.getActiveSpreadsheet();
+      if (!ss) return 'No active spreadsheet and SPREADSHEET_ID is not set.';
+    } catch (err) {
+      return 'Cannot access active spreadsheet. (' + err.toString() + ')';
+    }
+  }
+
+  // Check Drive folder access if configured
+  if (UPLOAD_FOLDER_ID) {
+    try {
+      DriveApp.getFolderById(UPLOAD_FOLDER_ID);
+    } catch (err) {
+      return 'Cannot access upload folder by ID. (' + err.toString() + ')';
+    }
+  }
+
+  return null;
 }
 
 function createHtmlResponse(message, success, returnUrl) {
@@ -194,6 +240,22 @@ function saveToSheet(data) {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.getRange(1, 1, 1, COLUMN_HEADERS.length).setValues([COLUMN_HEADERS]);
     sheet.getRange(1, 1, 1, COLUMN_HEADERS.length).setFontWeight("bold");
+    sheet.setFrozenRows(1);
+  } else {
+    // Ensure the header row exists and matches COLUMN_HEADERS; update if not
+    try {
+      const existingHeaders = sheet.getRange(1, 1, 1, COLUMN_HEADERS.length).getValues()[0];
+      if (existingHeaders.join() !== COLUMN_HEADERS.join()) {
+        sheet.getRange(1, 1, 1, COLUMN_HEADERS.length).setValues([COLUMN_HEADERS]);
+        sheet.getRange(1, 1, 1, COLUMN_HEADERS.length).setFontWeight("bold");
+        sheet.setFrozenRows(1);
+      }
+    } catch (err) {
+      // If reading headers fails (e.g. sheet is empty), write headers
+      sheet.getRange(1, 1, 1, COLUMN_HEADERS.length).setValues([COLUMN_HEADERS]);
+      sheet.getRange(1, 1, 1, COLUMN_HEADERS.length).setFontWeight("bold");
+      sheet.setFrozenRows(1);
+    }
   }
 
   // Map data to column order

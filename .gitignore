@@ -1,1 +1,2 @@
-*.Apps Script.gs
+*
+.Apps Script.gs
