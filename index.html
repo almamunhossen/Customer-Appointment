@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>amhaj · client studio</title>
+  <!-- Google Fonts (Inter + Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="glass-card">
+
+  <div class="portal-header">
+    <div class="logo">
+      <img src="img/Amhaj-Digital-Solutions-Logo.png" alt="amhaj logo" class="logo-img">
+    </div>
+    <div class="badge-hero"><i class="fas fa-circle-check"></i> creative intake v2</div>
+  </div>
+
+  <div class="hero-title">
+    <h1>launch your campaign · creative brief</h1>
+    <p><i class="fas fa-arrow-right" style="color: var(--primary-orange); margin-right: 6px;"></i> expand one category at a time select services, attach assets. Data is sent directly to your Google Sheet.</p>
+  </div>
+
+  <!-- FORM — action points to your Google Apps Script web app -->
+  <form id="intakeForm" action="https://script.google.com/macros/s/AKfycbxb9VL9aqlQa7KwRzSuyRLl062ZMn2sKTx9Gh9K7De_Lq6VWMLjG6jcHDCVtuEYQJCh/exec" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="returnUrl" id="returnUrl" value="">
+
+    <!-- CUSTOMER -->
+    <div class="form-section">
+      <div class="section-label"><i class="fas fa-user"></i> customer information</div>
+      <div class="grid-2">
+        <div class="form-group"><label>full name *</label><input type="text" name="fullName" class="form-control" placeholder="Jane Doe" required></div>
+        <div class="form-group"><label>company</label><input type="text" name="companyName" class="form-control" placeholder="Company Ltd"></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label>email *</label><input type="email" name="email" class="form-control" placeholder="name@example.com" required></div>
+        <div class="form-group"><label>phone *</label><input type="tel" name="phone" class="form-control" placeholder="+00 0000 0000" required></div>
+        <div class="form-group"><label>whatsapp</label><input type="tel" name="whatsapp" class="form-control" placeholder="+00 0000 0000"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label>country</label><input type="text" name="country" class="form-control" placeholder="Saudi Arabia"></div>
+        <div class="form-group"><label>address</label><input type="text" name="address" class="form-control" placeholder="Street, City"></div>
+      </div>
+    </div>
+
+    <!-- SERVICES (ACCORDION) -->
+    <div class="form-section">
+      <div class="section-label"><i class="fas fa-layer-group"></i> select services · accordion (auto‑close)</div>
+      <div class="accordion-wrapper" id="accordionWrapper">
+
+        <!-- 1. Branding -->
+        <div class="accordion-item open">
+          <button class="accordion-header" type="button" aria-expanded="true">
+            <i class="fas fa-paint-brush"></i> Branding & Identity
+            <span class="badge-count" id="badge-branding">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="branding">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Brand Identity Design"> Brand Identity Design</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Logo Design"> Logo Design</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Logo Redesign"> Logo Redesign</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Company Branding"> Company Branding</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Brand Guidelines"> Brand Guidelines</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Corporate Identity"> Corporate Identity</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Business Card Design"> Business Card</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Letterhead Design"> Letterhead</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Envelope Design"> Envelope</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Company Profile Design"> Company Profile</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Brochure Design"> Brochure</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Flyer Design"> Flyer</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Poster Design"> Poster</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Banner Design"> Banner</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Roll-Up Banner Design"> Roll-Up</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Menu Design"> Menu</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Packaging Design"> Packaging</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Product Label Design"> Product Label</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Sticker Design"> Sticker</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Social Media Branding Kit"> Social Kit</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Presentation Design"> Presentation</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Email Signature Design"> Email Signature</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Invoice & Quotation Design"> Invoice Design</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Certificate Design"> Certificate</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Custom Design Service"> Custom Design</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Web -->
+        <div class="accordion-item">
+          <button class="accordion-header" type="button" aria-expanded="false">
+            <i class="fas fa-globe"></i> Web & Development
+            <span class="badge-count" id="badge-web">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="web">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Business Website"> Business Website</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Corporate Website"> Corporate</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Portfolio Website"> Portfolio</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Personal Website"> Personal</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Landing Page"> Landing Page</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="E-commerce Website"> E‑commerce</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Blog Website"> Blog</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="News Portal"> News Portal</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="School Website"> School</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Restaurant Website"> Restaurant</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Hotel Website"> Hotel</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Real Estate Website"> Real Estate</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Medical Website"> Medical</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="WordPress Website"> WordPress</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Website Redesign"> Redesign</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Website Maintenance"> Maintenance</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="UI/UX Design"> UI/UX</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Responsive Design"> Responsive</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Speed Optimization"> Speed Optimize</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="SEO Optimization"> SEO</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Domain Registration"> Domain</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Web Hosting"> Hosting</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="SSL Installation"> SSL</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Business Email Setup"> Email Setup</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Website Migration"> Migration</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="API Integration"> API</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Payment Gateway Integration"> Payment Gateway</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Custom Web Application"> Web App</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Website Security"> Security</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Technical Support"> Tech Support</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. QR -->
+        <div class="accordion-item">
+          <button class="accordion-header" type="button" aria-expanded="false">
+            <i class="fas fa-qrcode"></i> QR & Barcode
+            <span class="badge-count" id="badge-qr">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="qr">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Digital Business Card"> Digital Card</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Smart QR Code"> Smart QR</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Product QR Code"> Product QR</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Restaurant QR Menu"> Restaurant QR</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="WhatsApp QR"> WhatsApp</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Facebook QR"> Facebook</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Instagram QR"> Instagram</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="TikTok QR"> TikTok</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="YouTube QR"> YouTube</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="LinkedIn QR"> LinkedIn</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Google Review QR"> Google Review</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Google Maps QR"> Google Maps</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="WiFi QR"> WiFi</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Payment QR"> Payment</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="PDF QR"> PDF</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="File Download QR"> File Download</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Event QR"> Event</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Ticket QR"> Ticket</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Resume QR"> Resume</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Portfolio QR"> Portfolio</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Multi-Link QR"> Multi‑Link</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Dynamic QR Code"> Dynamic QR</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Static QR Code"> Static QR</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Barcode Generation"> Barcode</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Custom QR Design"> Custom QR</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Printing -->
+        <div class="accordion-item">
+          <button class="accordion-header" type="button" aria-expanded="false">
+            <i class="fas fa-print"></i> Printing & Production
+            <span class="badge-count" id="badge-print">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="print">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Document Printing"> Document Print</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Black & White Printing"> B&W</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Color Printing"> Color</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="A4 Printing"> A4</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="A3 Printing"> A3</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Legal Printing"> Legal</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Letter Printing"> Letter</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Duplex Printing"> Duplex</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Bulk Printing"> Bulk</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Business Printing"> Business Print</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Business Cards"> Business Cards</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Letterheads"> Letterheads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Envelopes"> Envelopes</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Invoice Books"> Invoice Books</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Receipt Books"> Receipt Books</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Company Profile Printing"> Company Profile</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Notepads"> Notepads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="NCR Books"> NCR Books</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Marketing Materials"> Marketing</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Flyers"> Flyers</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Brochures"> Brochures</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Posters"> Posters</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Catalogs"> Catalogs</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Booklets"> Booklets</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Leaflets"> Leaflets</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Large Format"> Large Format</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Banner Printing"> Banner</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Roll-Up Banner"> Roll‑Up</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="X-Banner"> X‑Banner</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Backdrop Printing"> Backdrop</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Billboard Printing"> Billboard</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Vinyl Printing"> Vinyl</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Signage"> Signage</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Signboards"> Signboards</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Acrylic Signs"> Acrylic</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="ACP Signboards"> ACP</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="LED Signboards"> LED</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Name Plates"> Name Plates</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Stickers & Labels"> Stickers</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Product Labels"> Product Labels</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Barcode Labels"> Barcode Labels</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="QR Stickers"> QR Stickers</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Vinyl Stickers"> Vinyl Stickers</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Transparent Stickers"> Transparent</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Packaging"> Packaging</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Product Boxes"> Product Boxes</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Gift Boxes"> Gift Boxes</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Food Packaging"> Food Packaging</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Paper Bags"> Paper Bags</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Custom Packaging"> Custom Packaging</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Promotional Items"> Promo Items</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="T-Shirt Printing"> T‑Shirt</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Polo Shirt Printing"> Polo</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Mug Printing"> Mug</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Cap Printing"> Cap</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Keychain Printing"> Keychain</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Pen Printing"> Pen</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Lanyards"> Lanyards</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="ID Cards"> ID Cards</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Photo Printing"> Photo</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Passport Photo"> Passport</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Photo Enlargement"> Enlargement</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Canvas Print"> Canvas</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Glossy Photo"> Glossy</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Matte Photo"> Matte</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Finishing"> Finishing</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Lamination"> Lamination</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="UV Coating"> UV Coating</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Embossing"> Embossing</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Foil Stamping"> Foil Stamping</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Die Cutting"> Die Cutting</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Spiral Binding"> Spiral Binding</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Hardcover Binding"> Hardcover</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Book Printing"> Book Printing</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Digital Marketing -->
+        <div class="accordion-item">
+          <button class="accordion-header" type="button" aria-expanded="false">
+            <i class="fas fa-bullhorn"></i>Digital Marketing
+            <span class="badge-count" id="badge-marketing">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="marketing">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Search Engine Optimization (SEO)"> SEO</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Local SEO"> Local SEO</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Technical SEO"> Technical SEO</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="On-Page SEO"> On‑Page SEO</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Off-Page SEO"> Off‑Page SEO</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Google Ads"> Google Ads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Facebook Ads"> Facebook Ads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Instagram Ads"> Instagram Ads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="TikTok Ads"> TikTok Ads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="LinkedIn Ads"> LinkedIn Ads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="YouTube Ads"> YouTube Ads</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Social Media Management"> SMM</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Content Creation"> Content Creation</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Copywriting"> Copywriting</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Graphic Design"> Graphic Design</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Motion Graphics"> Motion Graphics</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Video Editing"> Video Editing</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Reels Editing"> Reels</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Shorts Editing"> Shorts</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="YouTube Thumbnail"> Thumbnail</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="YouTube SEO"> YouTube SEO</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Email Marketing"> Email</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="SMS Marketing"> SMS</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="WhatsApp Marketing"> WhatsApp</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Influencer Marketing"> Influencer</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Brand Promotion"> Brand Promotion</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Analytics & Reporting"> Analytics</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Computer Repair -->
+        <div class="accordion-item">
+          <button class="accordion-header" type="button" aria-expanded="false">
+            <i class="fas fa-laptop"></i> Computer Repair
+            <span class="badge-count" id="badge-computer">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="computer">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Desktop Repair"> Desktop</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Laptop Repair"> Laptop</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="MacBook Repair"> MacBook</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Gaming PC Repair"> Gaming PC</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Computer Diagnostics"> Diagnostics</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Hardware Repair"> Hardware</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Software Repair"> Software</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Windows Installation"> Windows</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="macOS Installation"> macOS</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Linux Installation"> Linux</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Driver Installation"> Drivers</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Virus Removal"> Virus Removal</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Malware Removal"> Malware</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Data Recovery"> Data Recovery</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Data Backup"> Backup</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="SSD Upgrade"> SSD</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="HDD Upgrade"> HDD</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="RAM Upgrade"> RAM</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="CPU Upgrade"> CPU</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="GPU Installation"> GPU</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Motherboard Repair"> Motherboard</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Power Supply Replacement"> PSU</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Laptop Screen Replacement"> Screen</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Keyboard Replacement"> Keyboard</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Battery Replacement"> Battery</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Charging Port Repair"> Charging Port</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Hinge Repair"> Hinge</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Wi-Fi Repair"> Wi‑Fi</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Network Setup"> Network</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Printer Installation"> Printer</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Scanner Installation"> Scanner</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Microsoft Office Installation"> MS Office</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Adobe Software Installation"> Adobe</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Email Setup"> Email</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Cloud Backup"> Cloud Backup</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Password Recovery"> Password</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="PC Optimization"> Optimize</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="System Cleanup"> Cleanup</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Remote Support"> Remote</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Home & Office IT Support"> IT Support</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="On-Site Repair"> On‑Site</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Computer Cleaning"> Cleaning</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="CCTV Integration"> CCTV</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Business IT Support"> Business IT</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Photocopy -->
+        <div class="accordion-item">
+          <button class="accordion-header" type="button" aria-expanded="false">
+            <i class="fas fa-copy"></i> Photocopy Services
+            <span class="badge-count" id="badge-photocopy">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="photocopy">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Black & White Photocopy"> B&W Copy</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Color Photocopy"> Color Copy</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Single-Sided Copy"> Single‑Sided</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Double-Sided Copy"> Double‑Sided</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="A4 Copy"> A4</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="A3 Copy"> A3</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Legal Copy"> Legal</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Letter Copy"> Letter</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="ID Card Copy"> ID Card</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Passport Copy"> Passport</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Certificate Copy"> Certificate</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Book Copying"> Book</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Report Copying"> Report</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Office Documents"> Office Docs</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Thesis Copy"> Thesis</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Engineering Drawing Copy"> Engineering</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Blueprint Copy"> Blueprint</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Document Enlargement"> Enlarge</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Document Reduction"> Reduce</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Document Scanning"> Scan</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Scan to PDF"> Scan to PDF</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Scan to Email"> Scan to Email</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Lamination"> Lamination</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Stapling"> Stapling</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Binding"> Binding</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Bulk Photocopy"> Bulk</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Same-Day Service"> Same‑Day</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Other -->
+        <div class="accordion-item">
+          <button class="accordion-header" type="button" aria-expanded="false">
+            <i class="fas fa-ellipsis"></i> Other Custom
+            <span class="badge-count" id="badge-other">0</span>
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-body">
+            <div class="checkbox-grid" data-category="other">
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Corporate Event Management"> Event Mgmt</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Exhibition Setup"> Exhibition</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Conference Setup"> Conference</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Trade Show Booth Design"> Trade Show</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Promotional Gifts"> Promo Gifts</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Custom Merchandise"> Merchandise</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Digital Menu"> Digital Menu</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Business Consultation"> Consultation</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Unicode Font Development"> Unicode Font</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Font Design"> Font Design</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="OpenType Font Development"> OpenType</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Arabic Font Development"> Arabic Font</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Bengali Font Development"> Bengali Font</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="UI/UX Consultation"> UI/UX</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Graphic Design Consultation"> Graphic Consult</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Brand Strategy"> Brand Strategy</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Creative Direction"> Creative Dir</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Product Photography"> Product Photo</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Video Production"> Video Prod</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Drone Photography"> Drone</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Translation Services"> Translation</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="CV & Resume Design"> CV Design</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Government Applications"> Gov Apps</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Visa Assistance"> Visa</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="School & University Applications"> School Apps</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Data Entry"> Data Entry</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Document Typing"> Typing</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Custom Software Solution"> Custom SW</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Custom Digital Solution"> Custom Digital</label>
+              <label class="checkbox-container"><input type="checkbox" name="services[]" value="Other Services"> Other</label>
+            </div>
+            <div style="margin-top: 0.8rem;">
+              <input type="text" name="otherService" class="other-service-input" placeholder="describe any other service...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT SPECS -->
+    <div class="form-section">
+      <div class="section-label"><i class="fas fa-clipboard-list"></i> project specifications</div>
+      <div class="grid-2">
+        <div class="form-group"><label>project title *</label><input type="text" name="projectTitle" class="form-control" placeholder="Launch Campaign 2026" required></div>
+        <div class="form-group"><label>core goals</label><input type="text" name="goals" class="form-control" placeholder="Boost Sales, Awareness"></div>
+      </div>
+      <div class="form-group"><label>detailed description *</label><textarea name="projectDescription" class="form-control" rows="3" placeholder="Instructions, text copies, structural guides..." required></textarea></div>
+      <div class="grid-2">
+        <div class="form-group"><label>target audience</label><input type="text" name="targetAudience" class="form-control" placeholder="Local customers, tech-savvy"></div>
+        <div class="form-group"><label>brand colors</label><input type="text" name="brandColor" class="form-control" placeholder="#00298e, #f75023"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label>reference website</label><input type="url" name="referenceWebsite" class="form-control" placeholder="https://example.com"></div>
+        <div class="form-group"><label>reference design</label><input type="url" name="referenceDesign" class="form-control" placeholder="Dribbble / Behance"></div>
+      </div>
+      <div class="grid-3">
+        <div class="form-group"><label>preferred font</label><input type="text" name="preferredFont" class="form-control" placeholder="Inter, Poppins"></div>
+        <div class="form-group"><label>deadline</label><input type="date" name="deadline" class="form-control"></div>
+        <div class="form-group"><label>budget ($)</label><input type="text" name="budget" class="form-control" placeholder="1200"></div>
+      </div>
+      <div class="form-group"><label>priority *</label>
+        <select name="priority" class="form-control" required>
+          <option value="Low">Low</option><option value="Medium" selected>Medium</option><option value="High">High</option><option value="Urgent">Urgent</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="form-section">
+      <div class="section-label"><i class="fas fa-cloud-upload-alt"></i> assets & files</div>
+      <div class="upload-zone" id="dropArea" onclick="document.getElementById('fileInput').click()">
+        <i class="fas fa-file-arrow-up"></i>
+        <p><strong>drag & drop</strong> or click to browse</p>
+        <span>images, PDF, AI, PSD, ZIP, SVG, CDR, Excel, DOC…</span>
+        <input type="file" id="fileInput" name="clientFiles" multiple style="display: none;" onchange="handleFiles(this.files)">
+      </div>
+      <div class="preview-strip" id="previewContainer"></div>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="form-section">
+      <div class="section-label"><i class="fas fa-share-alt"></i> social links</div>
+      <div class="grid-2">
+        <div class="form-group"><label>website</label><input type="url" name="social_website" class="form-control" placeholder="https://"></div>
+        <div class="form-group"><label>facebook</label><input type="url" name="social_facebook" class="form-control" placeholder="https://facebook.com/"></div>
+        <div class="form-group"><label>instagram</label><input type="url" name="social_instagram" class="form-control" placeholder="https://instagram.com/"></div>
+        <div class="form-group"><label>linkedin</label><input type="url" name="social_linkedin" class="form-control" placeholder="https://linkedin.com/"></div>
+        <div class="form-group"><label>tiktok</label><input type="url" name="social_tiktok" class="form-control" placeholder="https://tiktok.com/@"></div>
+        <div class="form-group"><label>youtube</label><input type="url" name="social_youtube" class="form-control" placeholder="https://youtube.com/"></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-paper-plane"></i> send complete brief</button>
+    <div class="toast" id="statusMessage"></div>
+  </form>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
