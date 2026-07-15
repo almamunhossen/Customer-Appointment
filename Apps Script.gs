@@ -70,8 +70,15 @@ function doGet(e) {
 function doPost(e) {
   try {
     // Get form data
-    const params = e.parameter || {};
+    const params = getRequestParameters(e);
     const returnUrl = params.returnUrl || '';
+    Logger.log('doPost event keys: ' + (e ? Object.keys(e).join(',') : 'no event object'));
+    Logger.log('doPost raw parameters: ' + JSON.stringify(params));
+    if (e && e.postData) {
+      Logger.log('doPost postData type: ' + e.postData.type);
+      Logger.log('doPost postData length: ' + (e.postData.contents ? e.postData.contents.length : 'none'));
+    }
+
     // Quick access validation to avoid Google "You need access" UI for submitters
     const accessError = checkAccess();
     if (accessError) {
@@ -179,6 +186,34 @@ function getUploadedFiles(e) {
   return [];
 }
 
+function getRequestParameters(e) {
+  if (e && e.parameter) {
+    return e.parameter;
+  }
+
+  if (e && e.postData && e.postData.type === 'application/json') {
+    try {
+      return JSON.parse(e.postData.contents || '{}');
+    } catch (err) {
+      Logger.log('Failed to parse JSON POST body: ' + err.toString());
+    }
+  }
+
+  if (e && e.postData && e.postData.contents) {
+    const content = e.postData.contents;
+    if (typeof content === 'string') {
+      const parsed = {};
+      content.split('&').forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key) parsed[decodeURIComponent(key)] = decodeURIComponent(value || '');
+      });
+      return parsed;
+    }
+  }
+
+  return {};
+}
+
 /**
  * checkAccess - validate access to spreadsheet and upload folder early
  * Returns null if OK, or an error message string if access is missing.
@@ -233,6 +268,12 @@ function createHtmlResponse(message, success, returnUrl) {
  * Save form data to Google Sheet
  */
 function saveToSheet(data) {
+  if (!data || typeof data !== 'object') {
+    const errorMessage = 'saveToSheet called without valid data object';
+    Logger.log(errorMessage);
+    throw new Error(errorMessage);
+  }
+
   const ss = getSpreadsheet();
   let sheet = ss.getSheetByName(SHEET_NAME);
   
