@@ -167,7 +167,18 @@ function getUploadedFiles(e) {
 }
 
 function createHtmlResponse(message, success, returnUrl) {
-  const returnLink = returnUrl ? `<a href="${returnUrl}" style="display:inline-block;margin-top:18px;padding:12px 24px;border-radius:999px;background:${success ? '#2563eb' : '#f97316'};color:#ffffff;text-decoration:none;">Return to form</a>` : '';
+  // If a returnUrl is provided, redirect the client back to that URL with a success flag
+  if (returnUrl) {
+    var separator = returnUrl.indexOf('?') === -1 ? '?' : '&';
+    var target = returnUrl + separator + 'success=' + (success ? 'true' : 'false');
+    var redirectHtml = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<script>try{window.location.replace(' + JSON.stringify(target) + ');}catch(e){window.top.location.href=' + JSON.stringify(target) + ';}</script>' +
+      '<noscript><meta http-equiv="refresh" content="0;url=' + target + '" /></noscript></head><body></body></html>';
+    return HtmlService.createHtmlOutput(redirectHtml).setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+  }
+
+  // Fallback: show a simple HTML status page when no returnUrl is provided
+  const returnLink = '';
   const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${success ? 'Success' : 'Error'}</title></head><body style="margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#e2e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;"><div style="max-width:620px;width:100%;padding:30px;border-radius:24px;background:rgba(15,23,42,0.96);border:1px solid rgba(148,163,184,0.18);text-align:center;"><h1 style="margin:0 0 16px;font-size:1.9rem;color:${success ? '#86efac' : '#fda4af'};">${success ? 'Success' : 'Submission Failed'}</h1><p style="margin:0;font-size:1rem;line-height:1.7;color:#cbd5e1;">${message}</p>${returnLink}</div></body></html>`;
   return HtmlService.createHtmlOutput(html);
 }
