@@ -232,6 +232,7 @@ function updateFileInput() {
 // FORM SUBMISSION HANDLER
 // ============================================
 async function handleFormSubmit(e) {
+  e.preventDefault();
   // Validate required fields
   const checkboxes = document.querySelectorAll('input[name="services[]"]:checked');
   const otherField = document.querySelector('input[name="otherService"]');
@@ -239,7 +240,6 @@ async function handleFormSubmit(e) {
 
   // Check if at least one service is selected
   if (checkboxes.length === 0 && other === '') {
-    e.preventDefault();
     showToast('⚠️ Please select at least one service or describe your request.', {
       background: 'rgba(247, 127, 58, 0.08)',
       borderColor: 'rgba(247, 127, 58, 0.2)'
@@ -289,10 +289,13 @@ async function handleFormSubmit(e) {
       submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> send complete brief';
     }
   } catch (err) {
-    // network / CORS error — fallback to regular form submit so the existing server behavior continues
-    console.warn('Fetch submit failed, falling back to normal form submit:', err);
-    intakeForm.removeEventListener('submit', handleFormSubmit);
-    intakeForm.submit();
+    console.error('Submission failed:', err);
+    showToast('⚠️ Submission failed. Please check your internet connection or verify the Apps Script URL.', {
+      background: 'rgba(220,53,69,0.08)',
+      borderColor: 'rgba(220,53,69,0.2)'
+    });
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> send complete brief';
   }
 }
 
